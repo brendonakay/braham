@@ -38,6 +38,7 @@ class APR_obj():
         """
         TODO: comment
         """
+        return m*log(1+APR/m)
 
     def EAR_f(self, APR: float, m: int) -> float:
         """
