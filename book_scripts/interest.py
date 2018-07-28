@@ -3,6 +3,8 @@
 # Classes and functions given as examples from Chapter 5
 # in the book.
 #
+# Intro
+#
 
 import numpy as np
 from math import log
@@ -45,6 +47,18 @@ class APR_obj():
         TODO: comment
         """
         return (1+APR/m)**m-1
+
+    def Rc2APR(self, Rc: float, m: int) -> float:
+        """
+        TODO: comment
+        """
+        return m*(exp(Rc/m)-1)
+
+    def Rc2Rm(self, Rc: float, m: int) -> float:
+        """
+        TODO: comment
+        """
+        return exp(Rc/m)-1
 
 
 if __name__ == "__main__":

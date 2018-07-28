@@ -10,3 +10,4 @@ From Chapter 5: [Python for Finance - Second Edition](https://www.packtpub.com/b
 * BASH:
     * `source venv/bin/activate`
 * `pip install -r requirements.txt`
+* Don't forget `sudo apt-get install python3-tk`
