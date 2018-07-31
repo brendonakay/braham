@@ -1,2 +1,5 @@
 scipy
 numpy
+matplotlib
+pandas
+pandas-datareader
