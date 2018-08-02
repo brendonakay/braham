@@ -4,29 +4,29 @@
 #
 
 import pandas as pd
-from pandas_datareader import data
 
-#TODO: Turn this into a config parser
-EQUITIES_DICT = {0: {'ticker'   : 'VZ',
-                     'name'     : 'Verizon'},
-                 1: {'ticker'   : 'XOM',
-                     'name'     : 'ExxonMobil'},
-                 2: {'ticker'   : 'CVX',
-                     'name'     : 'Chevron'},
-                 3: {'ticker'   : 'IBM',
-                     'name'     : 'IBM'},
-                 4: {'ticker'   : 'PFE',
-                     'name'     : 'Pfizer'},
-                 5: {'ticker'   : 'KO',
-                     'name'     : 'Coca-Cola'},
-                 6: {'ticker'   : 'MRK',
-                     'name'     : 'Merck'},
-                 7: {'ticker'   : 'PG',
-                     'name'     : 'Procter & Gamble'},
-                 8: {'ticker'   : 'GE',
-                     'name'     : 'General Electric'},
-                 9: {'ticker'   : 'CSCO',
-                     'name'     : 'Cisco Systems'}}
+#TODO: * Turn this into a config parser
+#      * Refactor data input to something more dynamic.
+EQUITIES_DICT = {"name" : ['Verizon',
+                           'ExxonMobil',
+                           'Chevron',
+                           'IBM',
+                           'Pfizer',
+                           'Coca-Cola',
+                           'Merck',
+                           'Procter & Gamble',
+                           'General Electric',
+                           'Cisco Systems'],
+               "ticker" : ['VZ',
+                           'XOM',
+                           'CVX',
+                           'IBM',
+                           'PFE',
+                           'KO',
+                           'MRK',
+                           'PG',
+                           'GE',
+                           'CSCO']}
 
 class EquitiesObject(object):
     """
@@ -39,14 +39,10 @@ class EquitiesObject(object):
         Construct a pandas data frame of the most recent valuation for each
         stock.
         """
+        # equity objects
         self.equities_dict = EQUITIES_DICT
         self.equities_df = pd.DataFrame(data = self.equities_dict)
-        #import pdb; pdb.set_trace()
         
-        #TODO: Make this asynchronous!!!!
-        for key, equity in self.equities_df.items():
-            self.equities_df[key]['dividend'] = \
-                data.DataReader(equity['ticker'],
-                                       'yahoo-actions')['value'][:-1]
-
-
+        # dividend objects
+        self.dividend_df = pd.DataFrame()
+        
