@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 #
-# Classes and functions given as examples from Chapter 5
-# in the book.
-#
 # Stock valuation using the total payout model
 #
-#     Share Price = PV(Future total dividends * Repurchases) 
+#     Share Price = PV(Future total dividends * Repurchases)
 #                   / Shares outstanding
 #
 #             ... = (Dividends * Repurchases) / Shares outstanding
@@ -29,15 +26,11 @@ class DividendEquity(EquitiesObject):
 
     def __init__(self):
         super().__init__()
+        self._generate_dividend_dataframe()
 
     def _generate_dividend_dataframe(self):
         #TODO: Make this asynchronous!!!!
         for ticker in self.equities_dict['ticker']:
-            year_start = '2018-01-01' 
-            now = datetime.datetime.now()
-            self.dividend_df.concat = \
-                data.DataReader(ticker,
-                                'yahoo-dividends',
-                                '{}-{}-{}'.format(now.year,now.month,now.day),
-                                '{}-{}-{}'.format(now.year,now.month,now.day))
+            self.dividend_df_dict[ticker]=(data.DataReader(ticker,
+                                                           'yahoo-actions'))
 
