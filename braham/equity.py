@@ -68,6 +68,35 @@ class EquitiesObject(object):
             api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
                                            .format(endpoint=self.api_endpoint,
                                                      ticker=row["ticker"]))
-            total_debt_list.append(api_get_results.json()["totalDebt"])
+            total_debt_list.append(api_get_results.json()["financials"][0]["totalDebt"])
 
         self.equities_df["total_debt"] = total_debt_list
+
+    def get_total_revenue(self):
+        """
+        Append total revenue value for tickers in dataframe.
+        """
+        total_revenue_list = []
+
+        for index, row in self.equities_df.iterrows():
+            api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
+                                           .format(endpoint=self.api_endpoint,
+                                                     ticker=row["ticker"]))
+            total_revenue_list.append(api_get_results.json()["financials"][0]["totalRevenue"])
+
+        self.equities_df["total_revenue"] = total_revenue_list
+
+    def get_cash_and_equivalents(self):
+        """
+        Append cash and equivalents for tickers in dataframe. Also known
+        as total assets.
+        """
+        total_assets_list = []
+
+        for index, row in self.equities_df.iterrows():
+            api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
+                                           .format(endpoint=self.api_endpoint,
+                                                     ticker=row["ticker"]))
+            total_assets_list.append(api_get_results.json()["financials"][0]["totalAssets"])
+
+        self.equities_df["total_assets"] = total_assets_list
