@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 #
-# Core Abstract Class for interfacing with equities via the Pandas API.
+# Core Abstract Class
 #
 
 import pandas as pd
-from pandas_datareader import data
+#from pandas_datareader import data
+import requests
 
 #TODO: * Turn this into a config parser
 #      * Refactor data input to something more dynamic.
@@ -29,19 +30,44 @@ EQUITIES_DICT = {"name" : ['Verizon',
                            'GE',
                            'CSCO']}
 
+API_ENDPOINT = "https://api.iextrading.com/1.0"
+
 class EquitiesObject(object):
     """
-    Get list of top 10 equities with highest dividend payouts in the DOW Jones
-    Industrial index.
+    Data access object for extending to valuation models.
     """
 
     def __init__(self):
         """
-        Construct a pandas data frames
+        Set up basic stuff.
         """
-        # Equities
-        self.equities_dict = EQUITIES_DICT
-        self.equities_df = pd.DataFrame(data = self.equities_dict)
+        self.api_endpoint = API_ENDPOINT
+        self.equities_df = pd.DataFrame.from_dict(EQUITIES_DICT)
 
-        # Dividends
-        self.dividend_df_dict = {}
+    def get_market_cap(self):
+        """
+        Append market cap value for tickers in dataframe.
+        """
+        market_cap_list = []
+
+        for index, row in self.equities_df.iterrows():
+            api_get_results = requests.get("{endpoint}/stock/{ticker}/stats"\
+                                           .format(endpoint=self.api_endpoint,
+                                                     ticker=row["ticker"]))
+            market_cap_list.append(api_get_results.json()["marketcap"])
+
+        self.equities_df["market_cap"] = market_cap_list
+
+    def get_total_debt(self):
+        """
+        Append total debt value for tickers in dataframe.
+        """
+        total_debt_list = []
+
+        for index, row in self.equities_df.iterrows():
+            api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
+                                           .format(endpoint=self.api_endpoint,
+                                                     ticker=row["ticker"]))
+            total_debt_list.append(api_get_results.json()["totalDebt"])
+
+        self.equities_df["total_debt"] = total_debt_list
