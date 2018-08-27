@@ -3,5 +3,9 @@ numpy
 matplotlib
 pandas
 pandas-datareader
+<<<<<<< HEAD
 asyncio
 aiohttp
+=======
+flask
+>>>>>>> wip

@@ -1,5 +1,10 @@
 # braham
+<<<<<<< HEAD
 Stock valuation app.
+=======
+Stock valuation and Flask experiment. The `book_scripts` directory was written
+from examples out of chapter 5 in [Python for Finance - Second Edition](https://www.packtpub.com/big-data-and-business-intelligence/python-finance-second-edition)
+>>>>>>> wip
 
 ## Installation
 * Python 3.7
@@ -11,7 +16,17 @@ Stock valuation app.
 * `pip install -r requirements.txt`
 * Don't forget `sudo apt-get install python3-tk`
 
-### Mission:
+## Flask
+* Flask variables
+    * `export FLASK_APP=braham_flask`
+    * `export FLASK_ENV=development`
+* Tutorial
+    * [Tutorial](http://flask.pocoo.org/docs/1.0/tutorial/)
+
+## Mission:
+- Implement Equity meta dao
+  - IEX API
+
 - Dividend approach
   - Pull information for variables from the top 10 dividend paying companies
  in the DOW Industrial.
@@ -19,6 +34,7 @@ Stock valuation app.
  payout model.
   - Serve up in a digestible GUI. TODO: Flask app
 
+<<<<<<< HEAD
 - Enterprise value approach
    I'm unsure how to approach this one, so I'll start simple and build from
 there.
@@ -32,3 +48,8 @@ there.
 
 #### Book Scripts:
 From Chapter 5: [Python for Finance - Second Edition](https://www.packtpub.com/big-data-and-business-intelligence/python-finance-second-edition)
+=======
+- Acquirers Multiple
+  - [AM](https://acquirersmultiple.com/faq/)
+
+>>>>>>> wip
