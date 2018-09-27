@@ -3,6 +3,7 @@
 # Core Abstract Class
 #
 
+import asyncio
 import pandas as pd
 #from pandas_datareader import data
 import requests
@@ -44,7 +45,7 @@ class EquitiesObject(object):
         self.api_endpoint = API_ENDPOINT
         self.equities_df = pd.DataFrame.from_dict(EQUITIES_DICT)
 
-    def get_market_cap(self):
+    async def get_market_cap(self):
         """
         Append market cap value for tickers in dataframe.
         """
@@ -58,7 +59,7 @@ class EquitiesObject(object):
 
         self.equities_df["market_cap"] = market_cap_list
 
-    def get_total_debt(self):
+    async def get_total_debt(self):
         """
         Append total debt value for tickers in dataframe.
         """
@@ -72,7 +73,7 @@ class EquitiesObject(object):
 
         self.equities_df["total_debt"] = total_debt_list
 
-    def get_total_revenue(self):
+    async def get_total_revenue(self):
         """
         Append total revenue value for tickers in dataframe.
         """
@@ -86,7 +87,7 @@ class EquitiesObject(object):
 
         self.equities_df["total_revenue"] = total_revenue_list
 
-    def get_cash_and_equivalents(self):
+    async def get_cash_and_equivalents(self):
         """
         Append cash and equivalents for tickers in dataframe. Also known
         as total assets.
