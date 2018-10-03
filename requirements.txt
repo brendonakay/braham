@@ -3,3 +3,5 @@ numpy
 matplotlib
 pandas
 pandas-datareader
+asyncio
+aiohttp

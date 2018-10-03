@@ -2,3 +2,4 @@ venv
 *.swp
 *.pyc
 *.swo
+.vscode
