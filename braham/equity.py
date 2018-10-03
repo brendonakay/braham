@@ -94,15 +94,20 @@ class EquitiesObject(object):
         """
         Append total revenue value for tickers in dataframe.
         """
-        total_revenue_list = []
+        urls = [
+            f"{self.api_endpoint}/stock/{ticker}/financials"
+            for ticker in self.equities_df["ticker"]
+        ]
 
-        for index, row in self.equities_df.iterrows():
-            api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
-                                           .format(endpoint=self.api_endpoint,
-                                                     ticker=row["ticker"]))
-            total_revenue_list.append(api_get_results.json()["financials"][0]["totalRevenue"])
+        async with aiohttp.ClientSession() as session:
+            results = await asyncio.gather(
+                *[fetch(session, url) for url in urls]
+            )
+            results_json = list(map(json.loads, results))
 
-        self.equities_df["total_revenue"] = total_revenue_list
+        self.equities_df["total_revenue"] = [
+            i["financials"][0]["totalRevenue"] for i in results_json
+        ]
 
 
     async def get_cash_and_equivalents(self):
@@ -110,12 +115,17 @@ class EquitiesObject(object):
         Append cash and equivalents for tickers in dataframe. Also known
         as total assets.
         """
-        total_assets_list = []
+        urls = [
+            f"{self.api_endpoint}/stock/{ticker}/financials"
+            for ticker in self.equities_df["ticker"]
+        ]
 
-        for index, row in self.equities_df.iterrows():
-            api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
-                                           .format(endpoint=self.api_endpoint,
-                                                     ticker=row["ticker"]))
-            total_assets_list.append(api_get_results.json()["financials"][0]["totalAssets"])
+        async with aiohttp.ClientSession() as session:
+            results = await asyncio.gather(
+                *[fetch(session, url) for url in urls]
+            )
+            results_json = list(map(json.loads, results))
 
-        self.equities_df["total_assets"] = total_assets_list
+        self.equities_df["total_assets"] = [
+            i["financials"][0]["totalAssets"] for i in results_json
+        ]
