@@ -9,7 +9,6 @@
 #       down, where EBIT is constructed from the bottom up.
 #
 #    TODO: - Expand on denominator value for AM. It is more than just total rev.
-#          - Make calculations asynchronous.
 
 import asyncio
 from equity import EquitiesObject

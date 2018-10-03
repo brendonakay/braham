@@ -10,26 +10,34 @@ import json
 
 #TODO: * Turn this into a config parser
 #      * Refactor data input to something more dynamic.
-EQUITIES_DICT = {"name" : ['Verizon',
-                           'ExxonMobil',
-                           'Chevron',
-                           'IBM',
-                           'Pfizer',
-                           'Coca-Cola',
-                           'Merck',
-                           'Procter & Gamble',
-                           'General Electric',
-                           'Cisco Systems'],
-               "ticker" : ['VZ',
-                           'XOM',
-                           'CVX',
-                           'IBM',
-                           'PFE',
-                           'KO',
-                           'MRK',
-                           'PG',
-                           'GE',
-                           'CSCO']}
+EQUITIES_DICT = {
+    "name" : [
+        'Peabody Energy Corporation',
+        'Verizon',
+        'ExxonMobil',
+        'Chevron',
+        'IBM',
+        'Pfizer',
+        'Coca-Cola',
+        'Merck',
+        'Procter & Gamble',
+        'General Electric',
+        'Cisco Systems',
+    ],
+    "ticker" : [
+        'BTU',
+        'VZ',
+        'XOM',
+        'CVX',
+        'IBM',
+        'PFE',
+        'KO',
+        'MRK',
+        'PG',
+        'GE',
+        'CSCO',
+    ],
+}
 
 API_ENDPOINT = "https://api.iextrading.com/1.0"
 
