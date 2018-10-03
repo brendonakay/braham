@@ -32,11 +32,11 @@ class AMEquity(EquitiesObject):
         super().__init__()
 
     async def _init_async(self):
-        await self.get_market_cap()
-        await self.get_total_debt()
+        # await self.get_market_cap()
+        # await self.get_total_debt()
         await self.get_cash_and_equivalents()
-        await self.get_total_revenue()
-        await self._calculate_acquirers_multiple()
+        # await self.get_total_revenue()
+        # await self._calculate_acquirers_multiple()
 
     async def _calculate_acquirers_multiple(self):
         self.equities_df["acquirers_multiple"] = (self.equities_df["market_cap"]\
@@ -47,3 +47,4 @@ class AMEquity(EquitiesObject):
 
 async def main():
     ame = await create_ame()
+    print(ame)
