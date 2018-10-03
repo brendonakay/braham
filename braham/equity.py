@@ -6,6 +6,7 @@
 import pandas as pd
 #from pandas_datareader import data
 import requests
+import concurrent.futures
 
 #TODO: * Turn this into a config parser
 #      * Refactor data input to something more dynamic.
@@ -50,11 +51,21 @@ class EquitiesObject(object):
         """
         market_cap_list = []
 
-        for index, row in self.equities_df.iterrows():
-            api_get_results = requests.get("{endpoint}/stock/{ticker}/stats"\
-                                           .format(endpoint=self.api_endpoint,
-                                                     ticker=row["ticker"]))
-            market_cap_list.append(api_get_results.json()["marketcap"])
+        urls = [
+            f"{self.api_endpoint}/stock/{ticker}/stats"
+            for ticker in self.equities_df["ticker"]
+        ]
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as pool:
+            futures = [pool.submit(requests.get, x) for x in urls]
+            for future in concurrent.futures.as_completed(futures):
+                market_cap_list.append(future.result().json()["marketcap"])
+
+        # for index, row in self.equities_df.iterrows():
+        #     api_get_results = requests.get("{endpoint}/stock/{ticker}/stats"\
+        #                                    .format(endpoint=self.api_endpoint,
+        #                                              ticker=row["ticker"]))
+        #     market_cap_list.append(api_get_results.json()["marketcap"])
 
         self.equities_df["market_cap"] = market_cap_list
 
@@ -64,11 +75,21 @@ class EquitiesObject(object):
         """
         total_debt_list = []
 
-        for index, row in self.equities_df.iterrows():
-            api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
-                                           .format(endpoint=self.api_endpoint,
-                                                     ticker=row["ticker"]))
-            total_debt_list.append(api_get_results.json()["financials"][0]["totalDebt"])
+        urls = [
+            f"{self.api_endpoint}/stock/{ticker}/financials"
+            for ticker in self.equities_df["ticker"]
+        ]
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as pool:
+            futures = [pool.submit(requests.get, x) for x in urls]
+            for future in concurrent.futures.as_completed(futures):
+                total_debt_list.append(future.result().json()["financials"][0]["totalDebt"])
+
+        # for index, row in self.equities_df.iterrows():
+        #     api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
+        #                                    .format(endpoint=self.api_endpoint,
+        #                                              ticker=row["ticker"]))
+        #     total_debt_list.append(api_get_results.json()["financials"][0]["totalDebt"])
 
         self.equities_df["total_debt"] = total_debt_list
 
@@ -78,11 +99,21 @@ class EquitiesObject(object):
         """
         total_revenue_list = []
 
-        for index, row in self.equities_df.iterrows():
-            api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
-                                           .format(endpoint=self.api_endpoint,
-                                                     ticker=row["ticker"]))
-            total_revenue_list.append(api_get_results.json()["financials"][0]["totalRevenue"])
+        urls = [
+            f"{self.api_endpoint}/stock/{ticker}/financials"
+            for ticker in self.equities_df["ticker"]
+        ]
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as pool:
+            futures = [pool.submit(requests.get, x) for x in urls]
+            for future in concurrent.futures.as_completed(futures):
+                total_revenue_list.append(future.result().json()["financials"][0]["totalRevenue"])
+
+        # for index, row in self.equities_df.iterrows():
+        #     api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
+        #                                    .format(endpoint=self.api_endpoint,
+        #                                              ticker=row["ticker"]))
+        #     total_revenue_list.append(api_get_results.json()["financials"][0]["totalRevenue"])
 
         self.equities_df["total_revenue"] = total_revenue_list
 
@@ -93,10 +124,20 @@ class EquitiesObject(object):
         """
         total_assets_list = []
 
-        for index, row in self.equities_df.iterrows():
-            api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
-                                           .format(endpoint=self.api_endpoint,
-                                                     ticker=row["ticker"]))
-            total_assets_list.append(api_get_results.json()["financials"][0]["totalAssets"])
+        urls = [
+            f"{self.api_endpoint}/stock/{ticker}/financials"
+            for ticker in self.equities_df["ticker"]
+        ]
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as pool:
+            futures = [pool.submit(requests.get, x) for x in urls]
+            for future in concurrent.futures.as_completed(futures):
+                total_assets_list.append(future.result().json()["financials"][0]["totalAssets"])
+
+        # for index, row in self.equities_df.iterrows():
+        #     api_get_results = requests.get("{endpoint}/stock/{ticker}/financials"\
+        #                                    .format(endpoint=self.api_endpoint,
+        #                                              ticker=row["ticker"]))
+        #     total_assets_list.append(api_get_results.json()["financials"][0]["totalAssets"])
 
         self.equities_df["total_assets"] = total_assets_list

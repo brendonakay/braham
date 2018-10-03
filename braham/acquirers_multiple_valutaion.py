@@ -5,7 +5,7 @@
 #
 #     Intrinsic Value = Enterprise Value / Operating Earnings*
 #
-#     Operating earnings is constructed from the top of the income statement 
+#     Operating earnings is constructed from the top of the income statement
 #       down, where EBIT is constructed from the bottom up.
 #
 #    TODO: - Expand on denominator value for AM. It is more than just total rev.
@@ -36,3 +36,6 @@ class AMEquity(EquitiesObject):
                                                 - self.equities_df["total_assets"])\
                                                 / \
                                                 self.equities_df["total_revenue"]
+
+ame = AMEquity()
+print(ame.equities_df)
