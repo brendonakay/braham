@@ -1,10 +1,5 @@
 # braham
-<<<<<<< HEAD
 Stock valuation app.
-=======
-Stock valuation and Flask experiment. The `book_scripts` directory was written
-from examples out of chapter 5 in [Python for Finance - Second Edition](https://www.packtpub.com/big-data-and-business-intelligence/python-finance-second-edition)
->>>>>>> wip
 
 ## Installation
 * Python 3.7
@@ -34,22 +29,6 @@ from examples out of chapter 5 in [Python for Finance - Second Edition](https://
  payout model.
   - Serve up in a digestible GUI. TODO: Flask app
 
-<<<<<<< HEAD
-- Enterprise value approach
-   I'm unsure how to approach this one, so I'll start simple and build from
-there.
-  - Pull information for variables from the top 10 dividend paying companies
- in the DOW Industrial.
-    - API: Pandas
-  - Asynchronously process each equity using the future free cash flows method.
-  - Serve up in same GUI interface.
-
-- [Acquirer's Multiple](https://acquirersmultiple.com/faq/)
-
-#### Book Scripts:
-From Chapter 5: [Python for Finance - Second Edition](https://www.packtpub.com/big-data-and-business-intelligence/python-finance-second-edition)
-=======
 - Acquirers Multiple
   - [AM](https://acquirersmultiple.com/faq/)
 
->>>>>>> wip
