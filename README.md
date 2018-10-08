@@ -15,6 +15,8 @@ Stock valuation app.
 * Flask variables
     * `export FLASK_APP=braham_flask`
     * `export FLASK_ENV=development`
+    * `flask init-db`
+    * `flask run`
 * Tutorial
     * [Tutorial](http://flask.pocoo.org/docs/1.0/tutorial/)
 
