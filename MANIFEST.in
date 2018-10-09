@@ -1,0 +1,4 @@
+include braham_flask/schema.sql
+graft braham_flask/static
+graft braham_flask/templates
+global-exclude *.pyc

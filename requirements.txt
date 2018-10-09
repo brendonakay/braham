@@ -5,3 +5,4 @@ pandas
 pandas-datareader
 asyncio
 aiohttp
+flask
