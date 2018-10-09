@@ -5,6 +5,9 @@
 import os
 
 from flask import Flask
+from . import db
+from . import auth
+from . import blog
 
 def create_app(test_config=None):
     # create and configure the app
@@ -28,17 +31,17 @@ def create_app(test_config=None):
         pass
 
     # a simple page that says hello
-    @app.route('/hello') #TODO: remove this
+    @app.route('/hello')
     def hello():
         return 'Hello, World!'
 
-    from . import db #TODO: move this ^
+    # initialize app
     db.init_app(app)
 
-    from . import auth #TODO: move this ^
+    # register auth blueprint
     app.register_blueprint(auth.bp)
 
-    from . import blog #TODO: move this ^
+    # register blog blueprint - index
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
 
