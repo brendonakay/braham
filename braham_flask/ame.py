@@ -11,7 +11,7 @@ import asyncio
 
 bp = Blueprint('ame', __name__, url_prefix='/ame')
 
-@bp.route('/ame', methods=('GET', 'POST'))
+@bp.route('/ame')
 def render_acquirers_multiple_valutaion():
     ame_factory = ame.factory()
     return render_template("ame/analysis.html", data=x.to_html())
