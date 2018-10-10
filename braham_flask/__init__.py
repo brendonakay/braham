@@ -8,6 +8,7 @@ from flask import Flask
 from . import db
 from . import auth
 from . import blog
+from . import ame
 
 def create_app(test_config=None):
     # create and configure the app
@@ -44,5 +45,8 @@ def create_app(test_config=None):
     # register blog blueprint - index
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
+
+    # register Acquirer's Multiple valutaion blueprint
+    app.register_blueprint(ame.bp)
 
     return app

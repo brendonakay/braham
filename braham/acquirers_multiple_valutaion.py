@@ -11,7 +11,7 @@
 #    TODO: - Expand on denominator value for AM. It is more than just total rev.
 
 import asyncio
-from equity import EquitiesObject
+from braham.equity import EquitiesObject
 
 async def create_ame(): #TODO rename this
     ame = AMEquity()
@@ -44,9 +44,9 @@ class AMEquity(EquitiesObject):
                                                 / \
                                                 self.equities_df["total_revenue"]
 
-async def main():
-    ame = await create_ame()
-    print(ame.equities_df)
+def factory():
+    # ame = await create_ame()
+    # print(ame.equities_df)
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main())
+    loop = asyncio.get_event_loop()
+    return loop.run_until_complete(create_ame)
